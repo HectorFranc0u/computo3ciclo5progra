@@ -10,7 +10,7 @@ class Post extends Model
     use HasFactory;
     //extracto de tecto content
     public function getExcerptAttribute(){
-        return substr($this->content, o, 150);
+        return substr($this->content, 0, 150);
     }
     //mostrar fecha de publicacion
     public function getPublishedAttribute(){

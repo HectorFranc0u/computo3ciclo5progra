@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\v1\PostController as v1;
 use App\Http\Controllers\API\v2\PostController as v2;
-
+use App\Http\Controllers\API\LoginController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,7 +22,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 */
 
 Route::apiResource('v1/posts', v1::class)
-    ->only(['index', 'show']); //habilita para la api el index y el show
+    ->only(['index', 'show']) //habilita para la api el index y el show
+    ->middleware('auth:sanctum');
 
 Route::apiResource('v2/posts', v2::class)
-    ->only(['index', 'show']); //habilita para la api el index y el show
+    ->only(['index', 'show']) //habilita para la api el index y el show
+    ->middleware('auth:sanctum');
+
+Route::post('login', [LoginController::class, 'login']);
